@@ -1,0 +1,131 @@
+<header class="page-header">
+	<div class="container-fluid">
+		<h2 class="no-margin-bottom">Transaction</h2>
+	</div>
+</header>
+
+<section class="forms"> 
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Basic Form-->
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header d-flex align-items-center">
+						<h3 class="h4">Transaction Data</h3>
+					</div>
+					<form #transactionForm="ngForm" (ngSubmit)="onSubmit()">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="form-group">
+									<label class="form-control-label">Start Date Transaction</label>
+									<input type="date" name="startDate" class="form-control"  #dt_Start_Log="ngModel" name="dt_Start_Log" [(ngModel)]="transaction.dt_Start_Log" >
+
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group">
+									<input type="hidden" name="current_date" #current_date="ngModel" name="dt_Start_Log" [(ngModel)]="transaction.current_date"  >
+									<label class="form-control-label">End Date Transaction</label>
+									<input type="date" name="endDate" class="form-control" #dt_end_log="ngModel" name="dt_end_log" [(ngModel)]="transaction.dt_end_log">
+
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group">       
+									<label class="form-control-label">State Code</label>
+									<select class="form-control" name="statecode"  #cd_cebroker_state="ngModel" name="cd_cebroker_state" [(ngModel)]="transaction.cd_cebroker_state">
+										<option>FL</option>
+										<option>OH</option>
+										<option>GA</option>
+										<option>LA</option>
+
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group " style="vertical-align : middle">       
+									<input type="submit"  value="Search" class="btn btn-primary">              
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="form-group">
+								
+								<label class="form-control-label">Order by</label>
+								<select class="form-control input-sm" [(ngModel)]="sortBy">
+									<option ngValue="dt_Start_Log">Start Log Date</option>
+									<option ngValue="cd_cebroker_state">State Code</option>
+									<option ngValue="cd_profession">Profession</option>
+									<option ngValue="id_license">License ID</option>
+									<option ngValue="ds_compl_status_returned">Complicance Status</option>
+									<option ngValue="id_client_nbr">Client ID</option>
+									<option ngValue="dt_end_log">End Log Date</option>
+									<option ngValue="cd_environment">Environment</option>
+									<option ngValue="cd_machine">Machine</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3"> 
+							<label class="form-control-label">Type Order by</label>
+							<select class="form-control input-sm" [(ngModel)]="sortOrder">
+								<option ngValue="asc">Ascending</option>
+								<option ngValue="desc">Descending</option>
+							</select>
+						</div>	
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-body">
+									<table class="table table-striped" [mfData]="data" #mf="mfDataTable"
+									[mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+									<thead>
+										<tr>
+											<th><mfDefaultSorter by="cd_cebroker_state">State Code</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="pro_cde">Pro Code</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="cd_profession">Profession</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="id_license">License ID</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="ds_compl_status_returned">Complicance Status</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="id_client_nbr">Client ID</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="dt_Start_Log">Start Log Date</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="dt_end_log">End Log Date</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="cd_environment">Environment</mfDefaultSorter></th>
+											<th><mfDefaultSorter by="cd_machine">Machine</mfDefaultSorter></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let ins of mf.data">
+											<td>{{ ins.cd_cebroker_state }}</td>
+											<td>{{ ins.pro_cde }}</td>
+											<td>{{ ins.cd_profession }}</td>
+											<td>{{ ins.id_license }}</td>
+											<td>{{ ins.ds_compl_status_returned }}</td>
+											<td>{{ ins.id_client_nbr }}</td>
+											<td>{{ ins.dt_Start_Log }}</td>
+											<td>{{ ins.dt_end_log }}</td>
+											<td>{{ ins.cd_environment }}</td>
+											<td>{{ ins.cd_machine }}</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="4">
+												<mfBootstrapPaginator [rowsOnPageSet]="[10,20,30]"></mfBootstrapPaginator>
+											</td>
+										</tr>
+									</tfoot>
+								</table>    
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</section>

@@ -1,0 +1,58 @@
+
+<header class="page-header">
+	<div class="container-fluid">
+		<h2 class="no-margin-bottom">Machine ID</h2>
+	</div>
+</header>
+
+<section class="forms">
+	<div class="container-fluid">
+        <div class="row"> 
+                <form #transactionForm="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Start Date Transaction</label>
+                                    <input type="date" name="startDate" class="form-control"  #dt_Start_Log="ngModel" name="dt_Start_Log" [(ngModel)]="transaction.dt_Start_Log" >
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <input type="hidden" name="current_date" #current_date="ngModel" name="dt_Start_Log" [(ngModel)]="transaction.current_date"  >
+                                    <label class="form-control-label">End Date Transaction</label>
+                                    <input type="date" name="endDate" class="form-control" #dt_end_log="ngModel" name="dt_end_log" [(ngModel)]="transaction.dt_end_log">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">       
+                                    <label class="form-control-label">State Code</label>
+                                    <select class="form-control" name="statecode"  #cd_cebroker_state="ngModel" name="cd_cebroker_state" [(ngModel)]="transaction.cd_cebroker_state">
+                                        <option>FL</option>
+                                        <option>OH</option>
+                                        <option>GA</option>
+                                        <option>LA</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group " style="vertical-align : middle">       
+                                    <input type="submit"  value="Search" class="btn btn-primary">              
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+        </div>  
+		<div class="row">
+<fusioncharts
+    width="600" 
+    height="400"
+    type="column2d"
+    dataFormat="json"
+    [dataSource]=dataSource >
+  </fusioncharts>
+</div>
+</div>
+</section>
