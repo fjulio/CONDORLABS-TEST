@@ -1,0 +1,38 @@
+1. the sql file contains the scripts of the requested reports, the database engine used is oracle, the scripts have own oracle functions
+2.the file "backend-node.rar" contains the code of the backend test, was made with node.js, and to make the respective tests, the "postman" application was used.
+It is necessary to have installed node.js to be able to execute the application and install "postman" application
+3.to execute the api rest service, the following command line "npm start" must be executed.
+Routes of the CRUD
+To create a provider you must enter the following route by the POST method
+localhost: 3987 / api / providers
+parameters for create and update register
+ params.firstName;
+	lastName;
+	middleName;
+	email;
+	projectedStartDate;
+	employerId;
+	providerType;
+	staffStatus;
+	assignedTo;
+	status;
+	createdBy;
+	createdAt;
+	updatedBy;
+	updatedAt;
+	specialty;
+
+To consult, update or delete the created provider, you must enter the following route
+localhost: 3987 / api / provider / ID_Provider example (localhost: 3987 / api / provider / 5a1ee627d0e8cfb9049a792d)
+it must be taken into account that the methodo GET is used to consult, to update the PUT method, and to delete the record the DELETE method is used
+
+To consult all the records you must enter the following route
+localhost: 3987 / api / providers
+
+4.The front end test was performed with the angular framework 2 to consume the resources of the api rest.
+to execute the project it is necessary to have angular installed cli, for this the console should execute the following command "npm install -g @ angular / cli".
+to execute the application by command line it is necessary that it be located on the project folder, example cd c: / xampp / htdocs / project, after accessing this route the following "ng serve" must be executed. All the above must be done by the console.
+To access the project you must type the following route in your browser
+http: // localhost: 4200
+
+attached file .rar node_modules, this file must be unzipped in the root of the client project of the test, contains libraries that were added and are necessary for the execution of the project
