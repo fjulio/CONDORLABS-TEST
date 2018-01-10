@@ -47,7 +47,9 @@ export class ChartsComponent implements OnInit {
                 "yaxisname": "Count",
                 theme: "ocean"
             },
-            data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
+            data: Object.keys(occurences).map(function (key) {
+                return { label: key, value: occurences[key] };
+              })
           };
       },error=>{
         var errorMessage = <any>error;
@@ -70,16 +72,12 @@ export class ChartsComponent implements OnInit {
       this._transactionService.transacts(start_date, end_date, state_code).subscribe(
         response=>{
              this.datas = response;
-            var result ;
             var counter = 0;
             var occurences = this.datas.reduce(function (r, row) {
             r[row.cd_machine] = ++r[row.cd_machine] || 1;
             return r;
         }, {});
 
-         result = Object.keys(occurences).map(function (key) {
-            return { key: key, value: occurences[key] };
-        });
 
         this.dataSource = {
               chart: {
@@ -90,7 +88,9 @@ export class ChartsComponent implements OnInit {
                   "yaxisname": "Count",
                   theme: "ocean"
               },
-              data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
+              data: Object.keys(occurences).map(function (key) {
+                return { label: key, value: occurences[key] };
+              })
             };
         },error=>{
           var errorMessage = <any>error;

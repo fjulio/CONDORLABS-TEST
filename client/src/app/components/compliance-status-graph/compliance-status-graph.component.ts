@@ -27,18 +27,12 @@ export class ComplianceStatusGraphComponent implements OnInit {
     this._transactionService.transact(current_date).subscribe(
       response=>{
           this.datas = response;
-          var result ;
           var counter = 0;
           var occurences = this.datas.reduce(function (r, row) {
           r[row.ds_compl_status_returned] = ++r[row.ds_compl_status_returned] || 1;
           return r;
       }, {});
-
-       result = Object.keys(occurences).map(function (key) {
-          return { key: key, value: occurences[key] };
-      });
-
-              this.dataSource = {
+     this.dataSource = {
             chart: {
                 caption: "Transactions",
                 subCaption: "Total Requests per Compliance Status ",
@@ -47,7 +41,9 @@ export class ComplianceStatusGraphComponent implements OnInit {
                 "yaxisname": "Count",
                 theme: "ocean"
             },
-            data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
+            data: Object.keys(occurences).map(function (key) {
+                return { label: key, value: occurences[key] };
+              })
           };
       },error=>{
         var errorMessage = <any>error;
@@ -90,7 +86,9 @@ export class ComplianceStatusGraphComponent implements OnInit {
                   "yaxisname": "Count",
                   theme: "ocean"
               },
-              data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
+              data: Object.keys(occurences).map(function (key) {
+                return { label: key, value: occurences[key] };
+              })
             };
         },error=>{
           var errorMessage = <any>error;
