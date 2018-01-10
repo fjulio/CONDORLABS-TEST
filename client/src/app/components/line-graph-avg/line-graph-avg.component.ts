@@ -5,12 +5,11 @@ import {TransactionService} from '../../services/transaction.service';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
-  selector: 'app-charts',
-  templateUrl: './charts.component.html',
-  styleUrls: ['./charts.component.css']
+  selector: 'app-line-graph-avg',
+  templateUrl: './line-graph-avg.component.html',
+  styleUrls: ['./line-graph-avg.component.css']
 })
-export class ChartsComponent implements OnInit {
-
+export class LineGraphAvgComponent implements OnInit {
   dataSource: Object;
   demoId: string;
   private datas;
@@ -30,7 +29,7 @@ export class ChartsComponent implements OnInit {
           var result ;
           var counter = 0;
           var occurences = this.datas.reduce(function (r, row) {
-          r[row.cd_machine] = ++r[row.cd_machine] || 1;
+          r[row.dt_end] = ++r[row.dt_end] || 1;
           return r;
       }, {});
 
@@ -41,13 +40,13 @@ export class ChartsComponent implements OnInit {
               this.dataSource = {
             chart: {
                 caption: "Transactions",
-                subCaption: "Number Machine Transaction per day",
-                numberPrefix: "#",
-                "xaxisname": "Machine",
-                "yaxisname": "Count",
+                subCaption: "Average Response Time per Day",
+                numberPrefix: "s",
+                "xaxisname": "Date",
+            	"yaxisname": "DateTime",
                 theme: "ocean"
             },
-            data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
+            data:[{label: result[0].key, value :result[0].value/3600},{label: result[1].key, value :result[1].value/3600}]
           };
       },error=>{
         var errorMessage = <any>error;
@@ -59,7 +58,7 @@ export class ChartsComponent implements OnInit {
   }
 
   public onSubmit(){
-    var start_date ;
+    var start_date;
     var end_date;
     var state_code = this.transaction.cd_cebroker_state;
     if(this.transaction.dt_Start_Log != null)
@@ -73,7 +72,7 @@ export class ChartsComponent implements OnInit {
             var result ;
             var counter = 0;
             var occurences = this.datas.reduce(function (r, row) {
-            r[row.cd_machine] = ++r[row.cd_machine] || 1;
+            r[row.dt_end] = ++r[row.dt_end] || 1;
             return r;
         }, {});
 
@@ -84,13 +83,13 @@ export class ChartsComponent implements OnInit {
         this.dataSource = {
               chart: {
                   caption: "Transactions",
-                  subCaption: "Number Transaction Per Machine ID",
-                  numberPrefix: "#",
-                  "xaxisname": "Machine",
-                  "yaxisname": "Count",
+                  subCaption: "Average Response Time per Day",
+                  numberPrefix: "s",
+                  "xaxisname": "Date",
+            	  "yaxisname": "DateTime",
                   theme: "ocean"
               },
-              data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
+              data:[{label: result[0].key, value :result[0].value/3600},{label: result[1].key, value :result[1].value/3600}]
             };
         },error=>{
           var errorMessage = <any>error;

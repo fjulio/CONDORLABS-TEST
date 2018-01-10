@@ -20,7 +20,7 @@ export class TransactionService{
 
 	transacts(start_date, end_date,state_code ){
 		let headers = new Headers({});
-		console.log(this.url+'/GetLogsRecordData?startdate='+start_date+'&enddate='+end_date);
+		console.log(this.url+'/GetLogsRecordData?startdate='+start_date+'&enddate='+end_date+'&state='+state_code);
 		return this._http.get(this.url+'/GetLogsRecordData?startdate='+start_date+'&enddate='+end_date+'&state='+state_code,{headers: headers}).map(res=>res.json());
 	}
 }

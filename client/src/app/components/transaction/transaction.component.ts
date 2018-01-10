@@ -50,20 +50,23 @@ export class TransactionComponent implements OnInit {
       var start_date = "";
       var end_date ="";
       var state_code = this.transaction.cd_cebroker_state;
-    if(this.transaction.dt_Start_Log != null)
+      console.log(this.transaction.dt_end_log + this.transaction.dt_end_log);
+    if(this.transaction.dt_Start_Log != "")
           start_date = this.transform(new Date(this.transaction.dt_Start_Log));
-    if(this.transaction.dt_end_log != null)
+    if(this.transaction.dt_end_log != "")
         end_date = this.transform(new Date(this.transaction.dt_end_log));
-  	this._transactionService.transacts(start_date, end_date, state_code).subscribe(
-  		response=>{
-        	this.data = response;
-  		},error=>{
-  			var errorMessage = <any>error;
-  			if(!errorMessage){
-  				console.log(error);
-  			}
-  		}
-  	);
+    if(this.transaction.dt_Start_Log  != "" && this.transaction.dt_end_log != ""){
+      	this._transactionService.transacts(start_date, end_date, state_code).subscribe(
+      		response=>{
+            	this.data = response;
+      		},error=>{
+      			var errorMessage = <any>error;
+      			if(!errorMessage){
+      				console.log(error);
+      			}
+      		}
+      	);
+    }
   }
 
   private transform(Date){
@@ -78,7 +81,7 @@ export class TransactionComponent implements OnInit {
       if(mm<10){
           mm='0'+mm;
       } 
-      var today = mm+'/'+dd+'/'+yyyy;
-      return today;
+      var todayCast = mm+'/'+dd+'/'+yyyy;
+      return todayCast;
   }
 }

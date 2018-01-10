@@ -41,8 +41,10 @@ export class ComplianceStatusGraphComponent implements OnInit {
               this.dataSource = {
             chart: {
                 caption: "Transactions",
-                subCaption: "Number Machine Transaction per day",
+                subCaption: "Compliance Status",
                 numberPrefix: "#",
+                "xaxisname": "Status",
+                "yaxisname": "Count",
                 theme: "ocean"
             },
             data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
@@ -64,36 +66,40 @@ export class ComplianceStatusGraphComponent implements OnInit {
           start_date = this.transform(new Date(this.transaction.dt_Start_Log));
     if(this.transaction.dt_end_log != null)
         end_date = this.transform(new Date(this.transaction.dt_end_log));
-    this._transactionService.transacts(start_date, end_date, state_code).subscribe(
-      response=>{
-           this.datas = response;
-          var result ;
-          var counter = 0;
-          var occurences = this.datas.reduce(function (r, row) {
-          r[row.ds_compl_status_returned] = ++r[row.ds_compl_status_returned] || 1;
-          return r;
-      }, {});
+    if(this.transaction.dt_Start_Log  != "" && this.transaction.dt_end_log != ""){
+      this._transactionService.transacts(start_date, end_date, state_code).subscribe(
+        response=>{
+             this.datas = response;
+            var result ;
+            var counter = 0;
+            var occurences = this.datas.reduce(function (r, row) {
+            r[row.ds_compl_status_returned] = ++r[row.ds_compl_status_returned] || 1;
+            return r;
+        }, {});
 
-       result = Object.keys(occurences).map(function (key) {
-          return { key: key, value: occurences[key] };
-      });
+         result = Object.keys(occurences).map(function (key) {
+            return { key: key, value: occurences[key] };
+        });
 
-      this.dataSource = {
-            chart: {
-                caption: "Transactions",
-                subCaption: "Number Transaction Per Machine ID",
-                numberPrefix: "#",
-                theme: "ocean"
-            },
-            data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
-          };
-      },error=>{
-        var errorMessage = <any>error;
-        if(!errorMessage){
-          console.log(error);
+        this.dataSource = {
+              chart: {
+                  caption: "Transactions",
+                  subCaption: "Compliance Status",
+                  numberPrefix: "#",
+                  "xaxisname": "Status",
+                  "yaxisname": "Count",
+                  theme: "ocean"
+              },
+              data:[{label: result[0].key, value :result[0].value},{label: result[1].key, value :result[1].value}]
+            };
+        },error=>{
+          var errorMessage = <any>error;
+          if(!errorMessage){
+            console.log(error);
+          }
         }
-      }
-    );
+      );
+    }
   }
 
 
@@ -109,8 +115,8 @@ export class ComplianceStatusGraphComponent implements OnInit {
       if(mm<10){
           mm='0'+mm;
       } 
-      var today = mm+'/'+dd+'/'+yyyy;
-      return today;
+      var todayCast = mm+'/'+dd+'/'+yyyy;
+      return todayCast;
   }
 
 }

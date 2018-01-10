@@ -22,6 +22,7 @@ import { TransactionComponent } from './components/transaction/transaction.compo
 import { NavComponent } from './components/nav/nav.component';
 import { ChartsComponent } from './components/charts/charts.component';
 import { ComplianceStatusGraphComponent } from './components/compliance-status-graph/compliance-status-graph.component';
+import { LineGraphAvgComponent } from './components/line-graph-avg/line-graph-avg.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ComplianceStatusGraphComponent } from './components/compliance-status-g
     TransactionComponent,
     NavComponent,
     ChartsComponent,
-    ComplianceStatusGraphComponent
+    ComplianceStatusGraphComponent,
+    LineGraphAvgComponent
   ],
   imports: [
     BrowserModule,
