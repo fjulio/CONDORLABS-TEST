@@ -41,7 +41,7 @@ export class ComplianceStatusGraphComponent implements OnInit {
               this.dataSource = {
             chart: {
                 caption: "Transactions",
-                subCaption: "Compliance Status",
+                subCaption: "Total Requests per Compliance Status ",
                 numberPrefix: "#",
                 "xaxisname": "Status",
                 "yaxisname": "Count",
@@ -84,7 +84,7 @@ export class ComplianceStatusGraphComponent implements OnInit {
         this.dataSource = {
               chart: {
                   caption: "Transactions",
-                  subCaption: "Compliance Status",
+                  subCaption: "Total Requests per Compliance Status ",
                   numberPrefix: "#",
                   "xaxisname": "Status",
                   "yaxisname": "Count",

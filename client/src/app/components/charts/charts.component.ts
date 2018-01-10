@@ -41,7 +41,7 @@ export class ChartsComponent implements OnInit {
               this.dataSource = {
             chart: {
                 caption: "Transactions",
-                subCaption: "Number Machine Transaction per day",
+                subCaption: "Total Requests per Machine",
                 numberPrefix: "#",
                 "xaxisname": "Machine",
                 "yaxisname": "Count",
@@ -84,7 +84,7 @@ export class ChartsComponent implements OnInit {
         this.dataSource = {
               chart: {
                   caption: "Transactions",
-                  subCaption: "Number Transaction Per Machine ID",
+                  subCaption: "Total Requests per Machine",
                   numberPrefix: "#",
                   "xaxisname": "Machine",
                   "yaxisname": "Count",
